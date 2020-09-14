@@ -43,7 +43,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   .tab-bar-item{
     /* 居中显示 tabbar按钮移动的都是49px*/
     flex:1;
