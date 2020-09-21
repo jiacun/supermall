@@ -10,6 +10,7 @@
 <script>
 import Scroll from 'components/common/scroll/Scroll.vue'
 import CartListItem from "./CartListItem.vue"
+
 import {
   mapGetters
 } from "vuex"
@@ -31,12 +32,13 @@ export default {
 
 <style scoped>
 .cart-list {
+
   height: 100vh;
 }
 
 .content {
-  height: calc(100% - 93px);
-  overflow: hidden;
 
+  height: calc(100% - 44px - 49px - 44px);
+  overflow: hidden;
 }
 </style>

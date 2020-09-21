@@ -6,6 +6,8 @@
   </nav-bar>
   <!--列表 -->
   <cart-list />
+  <!--底部汇总-->
+  <cart-botton-bar />
 </div>
 </template>
 
@@ -13,6 +15,7 @@
 import NavBar from 'components/common/navbar/NavBar.vue'
 
 import CartList from "./chikdComps/CartList.vue"
+import CartBottonBar from "./chikdComps/CartBottonBar.vue"
 import {
   mapGetters
 } from "vuex"
@@ -20,7 +23,8 @@ export default {
   name: 'Cart',
   components: {
     NavBar,
-    CartList
+    CartList,
+    CartBottonBar
   },
   computed: {
 

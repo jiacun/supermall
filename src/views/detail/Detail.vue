@@ -16,7 +16,7 @@
   </scroll>
   <detail-bottom-bar @addCart="addToCart" />
   <back-top @click.native="backClick" v-show="isShowBackTop"></back-top>
-
+  <!-- <toast :message="message" :show="show" />-->
 </div>
 </template>
 
@@ -25,13 +25,20 @@ import DetailNavBar from "./childComps/DetailNavBar.vue"
 import DetailSwiper from "./childComps/DetailSwiper.vue"
 import DetailBaseInfo from "./childComps/DetailBaseInfo.vue"
 import DetailShopInfo from "./childComps/DetailShopInfo.vue"
+
+// import Toast from 'components/common/toast/Toast.vue'
 import Scroll from 'components/common/scroll/Scroll.vue'
+
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo.vue"
 import DetailParamInfo from "./childComps/DetailParamInfo.vue"
 import DetailCommentInfo from "./childComps/DetailCommentInfo.vue"
 import DetailBottomBar from "./childComps/DetailBottomBar"
 
 import GoodList from "components/content/goods/GoodList.vue"
+
+import {
+  mapActions
+} from "vuex"
 import {
   getDetail,
   Goods,
@@ -60,6 +67,7 @@ export default {
     DetailCommentInfo,
     GoodList,
     DetailBottomBar,
+    // Toast
   },
   mixins: [itemListenerMixin, backTopMixin],
   data() {
@@ -75,7 +83,8 @@ export default {
       themeTopYs: [],
       getThemeTopY: null,
       currentIndex: 0,
-
+      // message: '',
+      // show: false
     }
   },
   created() {
@@ -129,6 +138,7 @@ export default {
     this.$bus.$off('itemImageLoad', this.itemListener)
   },
   methods: {
+    ...mapActions(['addCart']),
     imageLoad() {
       //刷新滚动组件大小
       this.newRefresh()
@@ -180,7 +190,21 @@ export default {
       // console.log(product)
       //2.将商品添加到购物车 调用vuex的方法传入参数
       // this.$store.commit('addCart', product)
-      this.$store.dispatch('addCart', product)
+      //3.映射vuex中的actions的方法
+      this.addCart(product).then(res => {
+        //弹出消息
+        // this.show = true;
+        // this.message = res
+        // setTimeout(() => {
+        //   this.show = false;
+        //   this.message = ''
+        // }, 1500)
+        // console.log(this.$toast)
+        this.$toast.show(res, 2000)
+      })
+      // this.$store.dispatch('addCart', product).then(res => {
+      //   console.log(res);
+      // })
     }
 
   }
